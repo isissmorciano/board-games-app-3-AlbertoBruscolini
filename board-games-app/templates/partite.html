@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Partite – {{ gioco['nome'] }}{% endblock %}
+{% block content %}
+<h1>Partite: {{ gioco['nome'] }}</h1>
+<p>
+  Categoria: {{ gioco['categoria'] }} |
+  Max giocatori: {{ gioco['numero_giocatori_massimo'] }} |
+  Durata media: {{ gioco['durata_media'] }} min
+</p>
+<p><a href="{{ url_for('nuova_partita', gioco_id=gioco['id']) }}" class="btn">+ Registra Partita</a></p>
+
+{% if partite %}
+<table>
+  <thead>
+    <tr><th>Data</th><th>Vincitore</th><th>Punteggio</th></tr>
+  </thead>
+  <tbody>
+    {% for p in partite %}
+    <tr>
+      <td>{{ p['data'] }}</td>
+      <td>{{ p['vincitore'] }}</td>
+      <td>{{ p['punteggio_vincitore'] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>Nessuna partita registrata.</p>
+{% endif %}
+
+<p style="margin-top:1rem"><a href="{{ url_for('index') }}">← Torna ai giochi</a></p>
+{% endblock %}

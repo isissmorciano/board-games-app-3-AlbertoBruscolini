@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Giochi{% endblock %}
+{% block content %}
+<h1>Giochi da Tavolo</h1>
+<p><a href="{{ url_for('nuovo_gioco') }}" class="btn">+ Aggiungi Gioco</a></p>
+
+{% if giochi %}
+<table>
+  <thead>
+    <tr><th>Nome</th><th>Categoria</th><th>Max Giocatori</th><th>Durata (min)</th><th></th></tr>
+  </thead>
+  <tbody>
+    {% for g in giochi %}
+    <tr>
+      <td>{{ g['nome'] }}</td>
+      <td>{{ g['categoria'] }}</td>
+      <td>{{ g['numero_giocatori_massimo'] }}</td>
+      <td>{{ g['durata_media'] }}</td>
+      <td><a href="{{ url_for('lista_partite', gioco_id=g['id']) }}">Partite →</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>Nessun gioco presente.</p>
+{% endif %}
+{% endblock %}

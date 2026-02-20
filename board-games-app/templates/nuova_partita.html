@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Nuova Partita{% endblock %}
+{% block content %}
+<h1>Registra Partita – {{ gioco['nome'] }}</h1>
+<form method="POST">
+  <label>Data
+    <input type="date" name="data" required />
+  </label>
+  <label>Vincitore
+    <input type="text" name="vincitore" required />
+  </label>
+  <label>Punteggio del vincitore
+    <input type="number" name="punteggio_vincitore" min="0" required />
+  </label>
+  <div class="actions">
+    <button type="submit" class="btn">Salva</button>
+    <a href="{{ url_for('lista_partite', gioco_id=gioco['id']) }}">Annulla</a>
+  </div>
+</form>
+{% endblock %}
